@@ -133,7 +133,7 @@ function! NumberToggle()
         set norelativenumber
         set number
     else
-        set nonumber
+        set number
         set relativenumber
     endif
 endfunc
