@@ -74,7 +74,7 @@ set autoindent    " align the new line indent with the previous line
 
 set wrap
 set formatoptions=qrn1
-set colorcolumn=85
+set colorcolumn=80
 
 set encoding=utf-8
 set scrolloff=3
@@ -126,6 +126,8 @@ nnoremap ; :
 map <C-l> :NERDTreeToggle<CR>
 
 autocmd InsertEnter * :set number
+autocmd InsertEnter * :set relativenumber
+autocmd InsertLeave * :set number
 autocmd InsertLeave * :set relativenumber
 
 function! NumberToggle()
