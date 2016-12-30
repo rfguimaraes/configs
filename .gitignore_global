@@ -42,3 +42,12 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# LaTeX #
+#########
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.sav
+*.fls

@@ -16,12 +16,12 @@
 [submodule "bundle/fugitive"]
 	path = bundle/fugitive
 	url = git@github.com:tpope/vim-fugitive.git
-[submodule "bundle/vim-scala"]
-	path = bundle/vim-scala
-	url = git@github.com:derekwyatt/vim-scala.git
 [submodule "bundle/bundle/syntastic"]
 	path = bundle/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
+[submodule "bundle/AutoComplPop"]
+	path = bundle/AutoComplPop
+	url = git@github.com:vim-scripts/AutoComplPop.git
+[submodule "bundle/LaTeX-Suite-aka-Vim-LaTeX"]
+	path = bundle/LaTeX-Suite-aka-Vim-LaTeX
+	url = git@github.com:vim-scripts/LaTeX-Suite-aka-Vim-LaTeX.git

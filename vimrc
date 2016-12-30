@@ -64,7 +64,7 @@ set ofu=syntaxcomplete#Complete
 set nocompatible
 set modelines=0
 
-set textwidth=79  " lines longer than 79 columns will be broken
+set textwidth=76  " lines longer than 76 columns will be broken
 set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
 set tabstop=4     " a hard TAB displays as 4 columns
 set expandtab     " insert spaces when hitting TABs
@@ -74,7 +74,7 @@ set autoindent    " align the new line indent with the previous line
 
 set wrap
 set formatoptions=qrn1
-set colorcolumn=80
+set colorcolumn=76
 
 set encoding=utf-8
 set scrolloff=3
@@ -172,11 +172,16 @@ let g:rainbow_active = 1
     \   }
     \}
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Fugitive (git) status line
+set statusline+=%{fugitive#statusline()}
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" Autowrap
+set fo+=t
+
+" fix conflict between spell check and cursor line
+"hi clear SpellBad
+"hi clear SpellLocal
+"hi clear SpellCap
+hi SpellBad cterm=underline
+hi SpellCap cterm=bold
+hi SpellLocal cterm=bold
