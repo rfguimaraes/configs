@@ -172,9 +172,6 @@ let g:rainbow_active = 1
     \   }
     \}
 
-" Fugitive (git) status line
-set statusline+=%{fugitive#statusline()}
-
 " Autowrap
 set fo+=t
 
