@@ -25,3 +25,6 @@
 [submodule "bundle/LaTeX-Suite-aka-Vim-LaTeX"]
 	path = bundle/LaTeX-Suite-aka-Vim-LaTeX
 	url = git@github.com:vim-scripts/LaTeX-Suite-aka-Vim-LaTeX.git
+[submodule "bundle/vim-obsession"]
+	path = bundle/vim-obsession
+	url = git://github.com/tpope/vim-obsession.git

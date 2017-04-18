@@ -144,6 +144,9 @@ nnoremap <C-n> :call NumberToggle()<cr>
 
 au FocusLost * :wa
 
+if has('nvim')
+    set termguicolors
+endif
 set t_Co=256
 colorscheme wombat256
 
@@ -182,3 +185,8 @@ set fo+=t
 hi SpellBad cterm=underline
 hi SpellCap cterm=bold
 hi SpellLocal cterm=bold
+
+
+" Improve splitting
+set splitbelow
+set splitright
