@@ -60,8 +60,10 @@ filetype plugin off
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
+
 set ofu=syntaxcomplete#Complete
 set nocompatible
+
 set modelines=0
 
 set textwidth=76  " lines longer than 76 columns will be broken
@@ -122,8 +124,6 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
 nnoremap ; :
-
-map <C-l> :NERDTreeToggle<CR>
 
 autocmd InsertEnter * :set number
 autocmd InsertEnter * :set relativenumber
@@ -190,3 +190,22 @@ hi SpellLocal cterm=bold
 " Improve splitting
 set splitbelow
 set splitright
+
+" Syntastic: New User Recommended
+
+set statusline+=%#warningmsg#
+set statusline+=%{fugitive#statusline()}
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" NERDtree
+silent! nmap <F2> :NERDTreeToggle<CR>
+silent! map <F3> :NERDTreeFind<CR>
+
+let g:NERDTreeMapActivateNode="<F3>"
+let g:NERDTreeMapPreview="<F4>"
