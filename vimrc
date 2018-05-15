@@ -89,7 +89,7 @@ set hidden
 set wildmenu
 set wildmode=list:longest
 set visualbell
-set cursorline
+"set cursorline
 set ttyfast
 set ruler
 set backspace=indent,eol,start
@@ -306,3 +306,7 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 " disable the <tab> mapping provided by vimwiki, which interferes with SuperTab
 " https://github.com/ervandew/supertab/issues/148
 let g:vimwiki_table_mappings = 0
+
+autocmd FileType plaintex,tex,latex syntax spell toplevel
+
+set conceallevel=0
