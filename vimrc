@@ -69,7 +69,7 @@ set nocompatible
 
 set modelines=0
 
-set textwidth=76  " lines longer than 76 columns will be broken
+set textwidth=78  " lines longer than 76 columns will be broken
 set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
 set tabstop=4     " a hard TAB displays as 4 columns
 set expandtab     " insert spaces when hitting TABs
@@ -80,6 +80,7 @@ set autoindent    " align the new line indent with the previous line
 set wrap
 set formatoptions=qrn1
 set colorcolumn=76
+hi ColorColumn guibg=black
 
 set encoding=utf-8
 set scrolloff=3
@@ -150,8 +151,7 @@ au FocusLost * :wa
 if has('nvim')
     set termguicolors
 endif
-set t_Co=256
-colorscheme wombat256
+colorscheme onedark
 
 " Rainbow cfgs
 let g:rainbow_active = 1
@@ -309,4 +309,4 @@ let g:vimwiki_table_mappings = 0
 
 autocmd FileType plaintex,tex,latex syntax spell toplevel
 
-set conceallevel=0
+"set conceallevel=0
