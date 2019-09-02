@@ -79,7 +79,7 @@ set autoindent    " align the new line indent with the previous line
 
 set wrap
 set formatoptions=qrn1
-set colorcolumn=76
+set colorcolumn=78
 hi ColorColumn guibg=black
 
 set encoding=utf-8
@@ -205,6 +205,12 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" Syntastic java settings for classpath
+
+let g:syntastic_java_checkers=['javac']
+let g:syntastic_java_javac_config_file_enabled = 1
+
+
 "fugitive
 set statusline+=%{fugitive#statusline()}
 
@@ -227,28 +233,28 @@ endif
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 " Use smartcase.
-let g:neocomplete#enable_smart_case = 1
+let g:deoplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:deoplete#sources#syntax#min_keyword_length = 3
 
 " Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
+let g:deoplete#sources#dictionary#dictionaries = {
     \ 'default' : '',
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'scheme' : $HOME.'/.gosh_completions'
         \ }
 
 " Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
+if !exists('g:deoplete#keyword_patterns')
+    let g:deoplete#keyword_patterns = {}
 endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+let g:deoplete#keyword_patterns['default'] = '\h\w*'
 
 " Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+inoremap <expr><C-g>     deoplete#undo_completion()
+inoremap <expr><C-l>     deoplete#complete_common_string()
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
@@ -261,8 +267,8 @@ endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
 " Close popup by <Space>.
 "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
@@ -288,11 +294,11 @@ autocmd FileType java setlocal omnifunc=javacomplete#CompleteTags
 
 
 " Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-let g:neocomplete#sources#omni#input_patterns = {}
+if !exists('g:deoplete#sources#omni#input_patterns')
+let g:deoplete#sources#omni#input_patterns = {}
 endif
 if !exists('g:deocomplete#sources#omni#input_patterns')
-let g:neocomplete#sources#omni#input_patterns = {}
+let g:deoplete#sources#omni#input_patterns = {}
 endif
 
 "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
@@ -301,12 +307,25 @@ endif
 
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+let g:deoplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " disable the <tab> mapping provided by vimwiki, which interferes with SuperTab
 " https://github.com/ervandew/supertab/issues/148
 let g:vimwiki_table_mappings = 0
 
+" Grammarous mappings
+nmap <F4> <Plug>(grammarous-move-to-info-window)
+
 autocmd FileType plaintex,tex,latex syntax spell toplevel
 
-"set conceallevel=0
+" Neoformat
+
+let g:neoformat_java_google = {
+            \ 'exe': 'java',
+            \ 'args': ['-jar /home/ricardo/bin/mine/google-java-format.jar -'],
+            \ 'stdin': 1, 
+            \ }
+
+let g:neoformat_enabled_java = ['google']
+
+set conceallevel=0

@@ -82,3 +82,16 @@
 [submodule "bundle/vimwiki"]
 	path = bundle/vimwiki
 	url = https://github.com/vimwiki/vimwiki.git
+[submodule "bundle/vim-grammarous"]
+	path = bundle/vim-grammarous
+	url = git@github.com:rhysd/vim-grammarous.git
+[submodule "bundle/surround"]
+	path = bundle/surround
+	url = https://tpope.io/vim/surround.git
+[submodule "bundle/neoformat"]
+	path = bundle/neoformat
+	url = git@github.com:sbdchd/neoformat.git
+[submodule "bundle/onedark.vim"]
+	path = bundle/onedark.vim
+	url = https://github.com/joshdick/onedark.vim.git
+	branch = master
