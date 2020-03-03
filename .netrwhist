@@ -1,4 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/home/ricardo'
-let g:netrw_dirhist_2='/home/ricardo/vimwiki/Papers'
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/ricardo/Documentos/Academic/thesis_slides'
+let g:netrw_dirhist_3='/home/ricardo/Documentos/Academic/thesis_slides/figures'
+let g:netrw_dirhist_2='/home/ricardo/Documentos/Academic/2018/WOMoCoE/slides'
+let g:netrw_dirhist_1='/home/ricardo/Documentos/Academic/2018/WOMoCoE'

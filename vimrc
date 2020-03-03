@@ -9,16 +9,76 @@
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=/home/ricardo/.cache/dein/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state('/home/ricardo/.cache/dein')
+  call dein#begin('/home/ricardo/.cache/dein')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('/home/ricardo/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+  " Add or remove your plugins here like this:
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  "call dein#add('vim-scripts/AutoComplPop')
+  call dein#add('vim-scripts/a.vim')
+  call dein#add('flazz/vim-colorschemes')
+  call dein#add('ctrlpvim/ctrlp.vim')
+  call dein#add('Raimondi/delimitMate')
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('scrooloose/nerdcommenter')
+  call dein#add('joshdick/onedark.vim')
+  call dein#add('luochen1990/rainbow')
+  call dein#add('tpope/vim-surround')
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('altercation/vim-colors-solarized')
+  call dein#add('xolox/vim-easytags')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('rhysd/vim-grammarous')
+  call dein#add('xolox/vim-misc')
+  call dein#add('jistr/vim-nerdtree-tabs')
+  call dein#add('tpope/vim-obsession')
+  call dein#add('tpope/vim-sensible')
+  call dein#add('vimwiki/vimwiki')
+  call dein#add('scrooloose/syntastic')
+  call dein#add('lervag/vimtex')
+  call dein#add('deoplete-plugins/deoplete-jedi')
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
+
 " Uncomment the next line to make Vim more Vi-compatible
 " NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
 " options, so any other options should be set AFTER setting 'compatible'.
-set nocompatible
+"set nocompatible
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
-if has("syntax")
-  syntax on
-endif
+"if has("syntax")
+"  syntax on
+"endif
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
@@ -58,18 +118,18 @@ map <F8> :Errors <Enter>
 map <F9> :lcl <Enter>
 inoremap jk <ESC>
 
-filetype plugin off
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
+"filetype plugin off
+"execute pathogen#infect()
+"syntax on
+"filetype plugin indent on
 "filetype plugin on
 
 set ofu=syntaxcomplete#Complete
-set nocompatible
+"set nocompatible
 
 set modelines=0
 
-set textwidth=78  " lines longer than 76 columns will be broken
+set textwidth=76  " lines longer than 76 columns will be broken
 set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
 set tabstop=4     " a hard TAB displays as 4 columns
 set expandtab     " insert spaces when hitting TABs
@@ -79,7 +139,7 @@ set autoindent    " align the new line indent with the previous line
 
 set wrap
 set formatoptions=qrn1
-set colorcolumn=78
+set colorcolumn=76
 hi ColorColumn guibg=black
 
 set encoding=utf-8
@@ -148,9 +208,6 @@ nnoremap <C-n> :call NumberToggle()<cr>
 
 au FocusLost * :wa
 
-if has('nvim')
-    set termguicolors
-endif
 colorscheme onedark
 
 " Rainbow cfgs
@@ -162,9 +219,7 @@ let g:rainbow_active = 1
     \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
     \   'separately': {
     \       '*': {},
-    \       'tex': {
-    \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-    \       },
+    \       'tex': {'parentheses_options' : 'containedin=texMathZoneX containedin=texStatement containedin=texSectionZone containedin=texMathZoneW'},
     \       'lisp': {
     \           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
     \       },
@@ -204,6 +259,11 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_ignore_files = ['\m\c\.pgf$']
+let g:syntastic_disable_filetypes = ['pgf']
+let g:syntastic_tex_remove_include_errors = 1
+let g:syntastic_latex_remove_include_errors = 1
+let g:syntastic_quiet_messages = { "regex": "Do not use @ in LaTeX macro names"}
 
 " Syntastic java settings for classpath
 
@@ -226,88 +286,32 @@ let g:NERDTreeMapPreview="<F4>"
 if has('nvim')
     set termguicolors
     let g:deoplete#enable_at_startup = 1
+    au BufEnter,TermOpen term://* AcpDisable
+    au BufLeave term://* AcpEnable
 endif
+" Disable automatic completion
+let g:deoplete#disable_auto_complete = 0
+" Navigate with tab
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+" Automatically colorschemee 
 
-"neocomplete
-"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:deoplete#enable_at_startup = 1
-" Use smartcase.
-let g:deoplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:deoplete#sources#syntax#min_keyword_length = 3
-
-" Define dictionary.
-let g:deoplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:deoplete#keyword_patterns')
-    let g:deoplete#keyword_patterns = {}
-endif
-let g:deoplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     deoplete#undo_completion()
-inoremap <expr><C-l>     deoplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+" Vimtex
+" Avoid issues with deoplete
+call deoplete#custom#var('omni', 'input_patterns', {
+      \ 'tex': g:vimtex#re#deoplete
+      \})
 
 " Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType latex setlocal omnifunc=latexcomplete#CompleteTags
-autocmd FileType tex setlocal omnifunc=texcomplete#CompleteTags
-autocmd FileType java setlocal omnifunc=javacomplete#CompleteTags
+"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType latex setlocal omnifunc=latexcomplete#CompleteTags
+"autocmd FileType tex setlocal omnifunc=texcomplete#CompleteTags
+"autocmd FileType java setlocal omnifunc=javacomplete#CompleteTags
 
-
-
-" Enable heavy omni completion.
-if !exists('g:deoplete#sources#omni#input_patterns')
-let g:deoplete#sources#omni#input_patterns = {}
-endif
-if !exists('g:deocomplete#sources#omni#input_patterns')
-let g:deoplete#sources#omni#input_patterns = {}
-endif
-
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:deoplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " disable the <tab> mapping provided by vimwiki, which interferes with SuperTab
 " https://github.com/ervandew/supertab/issues/148
@@ -318,14 +322,15 @@ nmap <F4> <Plug>(grammarous-move-to-info-window)
 
 autocmd FileType plaintex,tex,latex syntax spell toplevel
 
-" Neoformat
-
-let g:neoformat_java_google = {
-            \ 'exe': 'java',
-            \ 'args': ['-jar /home/ricardo/bin/mine/google-java-format.jar -'],
-            \ 'stdin': 1, 
-            \ }
-
-let g:neoformat_enabled_java = ['google']
-
 set conceallevel=0
+
+
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
